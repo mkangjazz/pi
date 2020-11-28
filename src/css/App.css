@@ -1,0 +1,132 @@
+.App {}
+
+body {
+  font-family: "Helvetica", sans-serif;
+}
+
+header {
+  align-items: center;
+  background-color: #eee;
+  display: flex;
+  height: 4em;
+  justify-content: center;
+}
+
+h1 {
+  text-align: center;  
+}
+
+main {
+  display: flex;
+}
+
+.sidebar {
+  width: 40%;
+}
+
+.mainbar {
+  min-height: calc(100vh - 10em);
+  position: relative;
+  width: 60%;
+}
+
+.mainbar figure {
+  background-color: #eee;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+canvas {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+form {
+  padding: 2em;
+}
+
+.add-item {
+  background-color: blue;
+  border: none;
+  border-radius: .5em;
+  color: #fff;
+  font-size: 1.125em;
+  padding: 1em 2em;
+  width: 10em;
+}
+
+.remove-item {
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+}
+
+.remove-item span {
+  display: block;
+  height: 2em;
+  position: relative;
+  text-align: left;
+  text-indent: -999em;
+  width: 2em;
+}
+
+.remove-item span:before,
+.remove-item span:after {
+  border-top: 2px solid red;
+  content: "";
+  display: block;
+  left: 50%;
+  margin-left: -.5em;
+  position: absolute;
+  top: 50%;
+  width: 1em;
+}
+
+.remove-item span:before {
+  transform: rotate(45deg);
+}
+
+.remove-item span:after {
+  transform: rotate(-45deg);
+}
+
+fieldset {
+  align-items: flex-end;
+  background-color: floralwhite;
+  display: flex;
+  margin: 1em 0;
+  padding: 1em;
+  position: relative;
+}
+
+fieldset label {
+  width: 45%;
+}
+
+fieldset p {
+  font-weight: bold;
+  margin-bottom: .5em;
+}
+
+fieldset label {
+  margin-right: 5%;
+}
+
+fieldset input {
+  border: 1px solid #333;
+  border-radius: .25em;
+  display: block;
+  font-size: 1.125em;
+  outline: none;
+  padding: .25em;
+  width: 100%;
+}
