@@ -4,7 +4,6 @@ import React, {useState, useEffect, useRef, useLayoutEffect} from 'react';
 
 export default function Pi(props) {
   const canvasRef = useRef(null);
-  const [dimensions, setDimensions] = useState({ width:0, height: 0 });
 
   useLayoutEffect(function() {
     const canvas = canvasRef.current;
@@ -15,12 +14,16 @@ export default function Pi(props) {
   }, []);
 
   useEffect(() => {
-    const canvas = canvasRef.current
-    const context = canvas.getContext('2d')
-    //Our first draw
-    context.fillStyle = '#000000'
-    context.fillRect(0, 0, context.canvas.width, context.canvas.height)
-  }, [])
+    const canvas = canvasRef.current;
+    const context = canvas.getContext('2d');
+    const parentRect = canvas.parentElement.getBoundingClientRect();
+
+    context.fillStyle = '#333333';
+    context.textAlign = "center";
+    context.textBaseline = "middle";
+    context.font = '50px sans-serif';
+    context.fillText('Hello Pi', parentRect.width / 2, parentRect.height / 2);
+  }, []);
 
   return (
     <canvas
