@@ -17,31 +17,25 @@ export default function Item(props) {
   }
 
   return (
-    <li 
+    <tr 
       className="item"
       data-idx={`idx-${props.idx}`}
     >
-      <fieldset>
-        <label>
-          <p>
-            Item Name
-          </p>
+      <td>
           <input
             onChange= {handleItemNameChange}
             type="text"
             value={itemName}
           />
-        </label>
-        <label>
-          <p>
-            Number
-          </p>
-          <input
-            onChange= {handleItemNumberChange}
-            type="number"
-            value={itemNumber}
-          />
-        </label>
+      </td>
+      <td>
+        <input
+          onChange= {handleItemNumberChange}
+          type="number"
+          value={itemNumber}
+        />
+      </td>
+      <td>
         <button
           className="remove-item"
           onClick={ () => props.removeItem(props.idx) }
@@ -49,7 +43,7 @@ export default function Item(props) {
         >
           <span>Remove Item</span>
         </button>
-      </fieldset>
-    </li>
+      </td>
+    </tr>
   );
 }

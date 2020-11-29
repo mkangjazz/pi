@@ -1,16 +1,33 @@
 .App {}
 
 body {
-  font-family: "Helvetica", sans-serif;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+a:hover,
+.button:hover,
+button:hover {
+  cursor: pointer;
 }
 
 header {
   align-items: center;
   display: flex;
+  margin-bottom: 2em;
+  padding: 0 .5em;
 }
 
-h1 {
+header h1 {
   margin-right: auto;
+}
+
+header p {
+  margin-left: auto;
+  margin-right: 1em;
+}
+
+strong {
+  font-weight: bold;
 }
 
 main {
@@ -43,28 +60,45 @@ canvas {
 }
 
 form {
-  padding: 2em;
+  padding: 1em;
+}
+
+[disabled] {
+  opacity: .25;
+}
+
+[disabled]:hover {
+  cursor: not-allowed;
+}
+
+.button {
+  border-radius: .5em;
+  font-size: 1em;
+  padding: .5em 1.5em;
+  text-decoration: none;
+}
+
+.export-as-image {
+  background-color: transparent;
+  border: none;
+  color: blue;
+}
+
+.export-as-image[disabled] {
+  color: #333;
 }
 
 .add-item {
   background-color: blue;
   border: none;
-  border-radius: .5em;
   color: #fff;
-  margin-left: auto;
-  font-size: 1.125em;
-  padding: 1em 2em;
-  width: 10em;
+  margin: 0 .5em;
 }
 
 .remove-item {
   background: none;
   border: none;
-  margin: 0;
-  padding: 0;
-  position: absolute;
-  top: 0;
-  right: 0;
+  position: relative;
   z-index: 2;
 }
 
@@ -97,34 +131,46 @@ form {
   transform: rotate(-45deg);
 }
 
-fieldset {
-  align-items: flex-end;
-  background-color: floralwhite;
-  display: flex;
-  margin: 1em 0;
-  padding: 1em;
-  position: relative;
+table {
+  table-layout: fixed;
+  width: 100%;
 }
 
-fieldset label {
-  width: 45%;
+table th:nth-child(1),
+table td:nth-child(1) {
+  width: 60%;
 }
 
-fieldset p {
+table th:nth-child(2),
+table td:nth-child(2) {
+  width: 30%;
+}
+
+table th:nth-child(3),
+table td:nth-child(3) {
+  width: 10%;
+}
+
+table th {
+  padding: .25em;
+  text-align: left;
   font-weight: bold;
-  margin-bottom: .5em;
 }
 
-fieldset label {
-  margin-right: 5%;
+table td {
+  padding: .25em;
+  vertical-align: middle;
 }
 
-fieldset input {
+input {
   border: 1px solid #333;
   border-radius: .25em;
   display: block;
+  font-family: 'Josefin Sans', sans-serif;
   font-size: 1.125em;
   outline: none;
-  padding: .25em;
+  max-width: 100%;
+  padding: .25em 0;
+  text-indent: .25em;
   width: 100%;
 }

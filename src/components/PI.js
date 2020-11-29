@@ -3,7 +3,7 @@ import setupCanvas from '../js/setupCanvas';
 import React, {useState, useEffect, useRef, useLayoutEffect} from 'react';
 
 export default function Pi(props) {
-  const canvasRef = useRef(null);
+  const canvasRef = props.canvasRef;
 
   useLayoutEffect(function() {
     const canvas = canvasRef.current;
@@ -22,15 +22,14 @@ export default function Pi(props) {
     context.textAlign = "center";
     context.textBaseline = "middle";
     context.font = '50px sans-serif';
-    context.fillText('Hello Pi', parentRect.width / 2, parentRect.height / 2);
+    context.fillText('PI Life', parentRect.width / 2, parentRect.height / 2);
   }, []);
 
   return (
     <canvas
       className="pi"
       id="pi"
-      ref={canvasRef}
-      {...props}
+      ref={props.canvasRef}
     >
     </canvas>
   );
