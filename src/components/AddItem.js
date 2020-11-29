@@ -6,8 +6,8 @@ export default function AddItem(props) {
     props.setItems((current) => [
       ...current,
       <Item
-        key={`idx-${props.uID + 1}`}
-        idx={`${props.uID + 1}`}
+        key={`idx-${props.uID}`}
+        idx={`${props.uID}`}
         updateInputDisplay={props.updateInputDisplay}
         setInputRefs={props.setInputRefs}
         setHiddenItems={props.setHiddenItems}

@@ -20,19 +20,59 @@ function App() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    
-    // how can we remove the items from inputRefs
-    // if the x has been clicked?
-    // set a state on the component?
 
-//    const arr = inputRefs.filter((input) => (console.log(input)));
-//    console.log(arr);
-    updateInputDisplay();
-////    const obj = inputRefs.map((input) => ({
-////      [input.name]: input.value,
-////    }));
-//
-//    setCanvasData(obj);
+    function getNumberFromNameAttr(el) {
+      const name = el.getAttribute('name');
+      const arr = name.split('_');
+
+      return arr[1];
+    }
+    
+    function getKeyFromNameAttr(el) {
+      const name = el.getAttribute('name');
+      const arr = name.split('_');
+      
+      return arr[0];
+    }
+    
+    function getInputValueByName(name) {
+      let v;
+
+      for (let j = 0; j < inputRefs.length; j++) {
+        if (inputRefs[j].getAttribute('name') === name) {
+          v = inputRefs[j].value;
+        }
+      }
+
+      return v;
+    }
+
+    const data = (function() {
+      const arr = [];
+
+      for (let i = 0; i < uID; i++) {
+        if (hiddenItems.indexOf(`idx-${i}`) !== -1) {
+          console.log('hidden');
+          continue;
+        }
+
+        const obj = {};
+        const targetName = `name_${i}`;
+        const targetAmount = `amount_${i}`;
+        const key = getInputValueByName(targetName);
+        const value = getInputValueByName(targetAmount);
+
+        if (key && value) {
+          obj[key] = value;
+
+          arr.push(obj);
+        }
+      }
+
+      return arr;
+    }());
+    
+    setCanvasData(data);
   }
   
   useEffect(() => {
