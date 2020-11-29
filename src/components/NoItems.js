@@ -1,7 +1,8 @@
 export default function NoItems() {
   return (
     <tr>
-      <td>No slices found.</td>
+      <td></td>
+      <td colSpan="2">Add a slice to begin.</td>
     </tr>
   );
 }

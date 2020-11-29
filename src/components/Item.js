@@ -1,20 +1,30 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 export default function Item(props) {
-  const [itemName, setItemName] = useState("");
-  const [itemNumber, setItemNumber] = useState("");
+  let nameRef = null;
+  let amountRef = null;
   
-  function handleItemNameChange(e){
-    e.preventDefault();
-    
-    setItemName(e.target.value);
+  const setNameRef = (elem) => {
+    nameRef = elem;
+  }
+  
+  const setAmountRef = (elem) => {
+    amountRef = elem;
   }
 
-  function handleItemNumberChange(e){
-    e.preventDefault();
-
-    setItemNumber(e.target.value);
+  function handleRemoveClick(e) {
+    props.setHiddenItems((curr) => [...curr, `idx-${props.idx}`]);
   }
+      
+  useEffect(() => {
+    props.setInputRefs((prevState) => [
+      ...prevState,
+      nameRef,
+      amountRef,
+    ]);
+  }, [
+    props,
+  ]);
 
   return (
     <tr 
@@ -22,27 +32,27 @@ export default function Item(props) {
       data-idx={`idx-${props.idx}`}
     >
       <td>
-          <input
-            onChange= {handleItemNameChange}
-            type="text"
-            value={itemName}
-          />
-      </td>
-      <td>
-        <input
-          onChange= {handleItemNumberChange}
-          type="number"
-          value={itemNumber}
-        />
-      </td>
-      <td>
         <button
           className="remove-item"
-          onClick={ () => props.removeItem(props.idx) }
+          onClick={handleRemoveClick}
           type="button"
         >
           <span>Remove Item</span>
         </button>
+      </td>
+      <td>
+        <input
+          name={`name_${props.idx}`}
+          ref={setNameRef}
+          type="text"
+        />
+      </td>
+      <td>
+        <input
+          name={`amount_${props.idx}`}
+          ref={setAmountRef}
+          type="number"
+        />
       </td>
     </tr>
   );

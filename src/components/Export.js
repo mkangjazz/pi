@@ -11,7 +11,6 @@ export default function Export(props) {
         const alt = "Pie chart from canvas";
         const width = props.canvasRef.current.width / 2;
         const height = props.canvasRef.current.height / 2;
-        
         const popup = window.open('about:blank', 'image from canvas');
         const str = `<img src='${dataURL}' alt=${alt} width=${width} height=${height} />`;
 

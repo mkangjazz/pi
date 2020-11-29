@@ -1,4 +1,6 @@
-.App {}
+html {
+  background-color: #eee;
+}
 
 body {
   font-family: 'Josefin Sans', sans-serif;
@@ -17,13 +19,31 @@ header {
   padding: 0 .5em;
 }
 
-header h1 {
-  margin-right: auto;
+h1 {
+  padding: 2em 0;
+/*  text-align: center;*/
 }
 
-header p {
-  margin-left: auto;
-  margin-right: 1em;
+h1 span {}
+
+.actions {
+  align-items: center;
+/*  border-top: 1px solid #d3d3d3;*/
+  display: flex;
+  padding: 1em 0;
+}
+
+footer {
+  bottom: 0;
+  left: 0;
+  padding: 1em;
+  position: absolute;
+  right: 0;
+/*  text-align: center;*/
+}
+
+small {
+  font-size: .75em;
 }
 
 strong {
@@ -32,10 +52,13 @@ strong {
 
 main {
   display: flex;
+  min-height: calc(100vh);
 }
 
 .sidebar {
-  width: 40%;
+  background-color: #fff;
+  position: relative;
+  width: 30%;
 }
 
 .mainbar {
@@ -44,7 +67,6 @@ main {
 }
 
 .mainbar figure {
-  background-color: #eee;
   height: 0;
   padding-top: 60%;
   position: relative;
@@ -78,10 +100,17 @@ form {
   text-decoration: none;
 }
 
+.button + .button {
+  margin-left: 1em;
+}
+
 .export-as-image {
+  margin-left: auto !important;
+/*
   background-color: transparent;
   border: none;
   color: blue;
+*/
 }
 
 .export-as-image[disabled] {
@@ -92,13 +121,17 @@ form {
   background-color: blue;
   border: none;
   color: #fff;
-  margin: 0 .5em;
+}
+
+.make-chart {
+  
 }
 
 .remove-item {
   background: none;
   border: none;
   position: relative;
+  width: 100%;
   z-index: 2;
 }
 
@@ -108,7 +141,7 @@ form {
   position: relative;
   text-align: left;
   text-indent: -999em;
-  width: 2em;
+  width: 100%;
 }
 
 .remove-item span:before,
@@ -131,23 +164,33 @@ form {
   transform: rotate(-45deg);
 }
 
+hr {
+  border: none;
+  background-color: #eee;
+  display: block;
+  height: 2px;
+  margin: 0 0 1em;
+  width: 100%;
+}
+
 table {
+  margin-bottom: 1em;
   table-layout: fixed;
   width: 100%;
 }
 
-table th:nth-child(1),
-table td:nth-child(1) {
-  width: 60%;
-}
-
 table th:nth-child(2),
 table td:nth-child(2) {
-  width: 30%;
+  width: 60%;
 }
 
 table th:nth-child(3),
 table td:nth-child(3) {
+  width: 30%;
+}
+
+table th:nth-child(1),
+table td:nth-child(1) {
   width: 10%;
 }
 

@@ -5,7 +5,13 @@ export default function AddItem(props) {
   function addItem() {
     props.setItems((current) => [
       ...current,
-      <Item key={`idx-${props.uID + 1}`} idx={props.uID + 1} removeItem={props.removeItem} />
+      <Item
+        key={`idx-${props.uID + 1}`}
+        idx={`${props.uID + 1}`}
+        updateInputDisplay={props.updateInputDisplay}
+        setInputRefs={props.setInputRefs}
+        setHiddenItems={props.setHiddenItems}
+      />
     ]);
 
     props.setUID(props.uID + 1);
