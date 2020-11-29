@@ -1,10 +1,14 @@
 import setupCanvas from '../js/setupCanvas';
+import drawSegment from '../js/drawSegment';
+import drawEmptyMessage from '../js/drawEmptyMessage';
 
 import React, {useState, useEffect, useRef, useLayoutEffect} from 'react';
 
 export default function Pi(props) {
   const canvasRef = props.canvasRef;
 
+  console.log('canvas props', props.canvasData);
+  
   useLayoutEffect(function() {
     const canvas = canvasRef.current;
 
@@ -15,39 +19,12 @@ export default function Pi(props) {
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    const context = canvas.getContext('2d');
-    const parentRect = canvas.parentElement.getBoundingClientRect();
+    const pRect = canvas.parentElement.getBoundingClientRect();
 
-    const centerX = parentRect.width / 2;
-    const centerY = parentRect.height / 2;
-
-    context.clearRect(0, 0, parentRect.width, parentRect.height);
-
-    context.fillStyle = '#333333';
-//    context.textAlign = "center";
-//    context.textBaseline = "middle";
-//    context.font = '50px sans-serif';
-//    context.fillText('PI Life', centerX, centerY);
-
-    // need to define colors, too, maybe analogous shades?
-    // based on number of shapes?
-
-    const radius = 100;
-
-    function drawSegment() {
-      context.save();
-      context.beginPath();
-      context.moveTo(centerX, centerY);
-      context.lineTo(centerX, centerY - radius);
-      context.arc(centerX, centerY, radius, -Math.PI / 2, 1/4 * Math.PI, false);
-      context.closePath();
-      context.fill();
-      context.stroke();
-      context.restore();      
-    }
-    
-    drawSegment();
-  }, []);
+    props.canvasData.length > 0 ? drawSegment(canvas, pRect) : drawEmptyMessage(canvas, pRect);
+  }, [
+    [props]
+  ]);
 
   return (
     <canvas

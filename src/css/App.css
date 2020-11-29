@@ -57,13 +57,15 @@ main {
 
 .sidebar {
   background-color: #fff;
+  margin-left: auto;
   position: relative;
-  width: 30%;
+  width: 35%;
 }
 
 .mainbar {
+  margin-right: auto;
   position: relative;
-  width: 60%;
+  width: 65%;
 }
 
 .mainbar figure {
@@ -98,6 +100,13 @@ form {
   font-size: 1em;
   padding: .5em 1.5em;
   text-decoration: none;
+}
+
+.button-link {
+  background: transparent;
+  border: none;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .button + .button {

@@ -4,7 +4,6 @@ import './css/App.css';
 import React, {useEffect, useState} from 'react';
 
 import AddItem from './components/AddItem';
-import NoItems from './components/NoItems';
 import Item from './components/Item';
 import PI from './components/PI';
 import Export from './components/Export';
@@ -52,7 +51,6 @@ function App() {
 
       for (let i = 0; i < uID; i++) {
         if (hiddenItems.indexOf(`idx-${i}`) !== -1) {
-          console.log('hidden');
           continue;
         }
 
@@ -88,23 +86,34 @@ function App() {
   return (
     <div className="App">
       <main>
+        <section className="mainbar">
+          <figure>
+            <PI
+              canvasData={canvasData}
+              canvasRef={canvasRef}
+            />
+          </figure>
+        </section>
         <section className="sidebar">
           <form onSubmit={handleSubmit}>
             <h1>
               <span>Pi</span>
             </h1>
-            <table>
-              <thead>
-                <tr>
-                  <th>&nbsp;</th>
-                  <th>Name</th>
-                  <th>Amount</th>
-                </tr>
-              </thead>
-              <tbody>
-                {items.length > 0 ? items.map((item, index) => item) : <NoItems />}
-              </tbody>
-            </table>
+            {items.length > 0 ? 
+              <table>
+                <thead>
+                  <tr>
+                    <th>&nbsp;</th>
+                    <th>Name</th>
+                    <th>Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {items.map((item, index) => item)}
+                </tbody>
+              </table>
+              : null
+            }
             <div className="actions">
               <AddItem 
                 setInputRefs={setInputRefs}
@@ -120,7 +129,7 @@ function App() {
               >
                 Draw
               </button>
-              <Export 
+              <Export
                 canvasRef={canvasRef}
               />
             </div>
@@ -128,13 +137,6 @@ function App() {
           <footer>
             <p><small>&copy;{new Date().getFullYear()} Mike Kang</small></p>
           </footer>
-        </section>
-        <section className="mainbar">
-          <figure>
-            <PI
-              canvasRef={canvasRef}
-            />
-          </figure>
         </section>
       </main>
     </div>
