@@ -6,7 +6,10 @@ export default function Item(props) {
   
   const setNameRef = (elem) => {
     nameRef = elem;
-    nameRef.focus();
+    
+    if (nameRef) {
+      nameRef.focus();
+    }
   }
   
   const setAmountRef = (elem) => {

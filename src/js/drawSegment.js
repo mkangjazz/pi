@@ -1,15 +1,5 @@
-export default function drawSegment(canvas, rect) {
+export default function drawSegment(canvas, rect, color, radius) {
   const context = canvas.getContext('2d');
-  const radius = 100;
-
-// stuff to draw?
-// for each {} in props.canvasData
-// draw a slice of pie
-
-// part : total determines what?
-// angle? size of slice?
-
-// color/shade of slice? depend on amount?
 
   context.save();
   
@@ -21,7 +11,7 @@ export default function drawSegment(canvas, rect) {
   context.arc(rect.width / 2, rect.height / 2, radius, -Math.PI / 2, 1/4 * Math.PI, false);
   context.closePath();
   
-  context.fillStyle = '#333333';
+  context.fillStyle = color;
   context.fill();
   context.stroke();
 

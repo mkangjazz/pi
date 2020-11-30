@@ -1,5 +1,5 @@
 html {
-  background-color: #eee;
+
 }
 
 body {
@@ -21,14 +21,10 @@ header {
 
 h1 {
   padding: 2em 0;
-/*  text-align: center;*/
 }
-
-h1 span {}
 
 .actions {
   align-items: center;
-/*  border-top: 1px solid #d3d3d3;*/
   display: flex;
   padding: 1em 0;
 }
@@ -39,7 +35,6 @@ footer {
   padding: 1em;
   position: absolute;
   right: 0;
-/*  text-align: center;*/
 }
 
 small {
@@ -56,7 +51,7 @@ main {
 }
 
 .sidebar {
-  background-color: #fff;
+  background-color: #e3e3e3;
   margin-left: auto;
   position: relative;
   width: 35%;
@@ -70,7 +65,7 @@ main {
 
 .mainbar figure {
   height: 0;
-  padding-top: 60%;
+  padding-top: 65%;
   position: relative;
   width: 100%;
 }
@@ -84,7 +79,7 @@ canvas {
 }
 
 form {
-  padding: 1em;
+  padding: 1em 1em 3em;
 }
 
 [disabled] {

@@ -97,7 +97,7 @@ function App() {
         <section className="sidebar">
           <form onSubmit={handleSubmit}>
             <h1>
-              <span>Pi</span>
+              <span>π</span>
             </h1>
             {items.length > 0 ? 
               <table>
