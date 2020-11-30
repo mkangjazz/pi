@@ -1,4 +1,14 @@
 export default function drawPi(canvas, rect, data) {
+  function drawTitleSplash() {
+    context.save();
+    context.fillStyle = 'magenta';
+    context.textAlign = "center";
+    context.textBaseline = "middle";
+    context.font = '80px sans-serif'; // base off of window?
+    context.fillText("Splash Screen FPO", rect.width / 2, rect.height / 2);
+    context.restore();    
+  }
+  
   function drawLegend() {
     function drawMessage(text, y, color) {
       context.save();
@@ -141,12 +151,7 @@ export default function drawPi(canvas, rect, data) {
   context.clearRect(0, 0, rect.width, rect.height);
 
   if (data.length < 1) {
-    console.log('nada');
-//    data = [
-//      {
-//        "No Slices Found": 1
-//      }
-//    ];
+    drawTitleSplash();
   } else {
     total = (function() {
       var arr = [];
