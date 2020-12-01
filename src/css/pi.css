@@ -1,0 +1,35 @@
+/*
+.figure-wrapper {
+  background-color: #fff;
+  height: 0;
+  padding-top: 100%;
+  position: relative;
+  width: 100%;
+}
+*/
+
+/*
+.figure-wrapper figure {
+  background-color: #f3f3f3;
+  bottom: 1em;
+  left: 1em;
+  overflow: scroll;
+  position: absolute;
+  right: 1em;
+  top: 1em;
+}
+*/
+
+.figure-wrapper img {
+  display: block;
+  height: auto;
+  width: 100%;
+}
+
+.canvas-wrapper {
+  height: 1000px;
+  left: -999em;
+  position: absolute;
+  top: -999em;
+  width: 1000px;  
+}

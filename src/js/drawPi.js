@@ -1,27 +1,38 @@
-export default function drawPi(canvas, rect, data) {
+export default function drawPi(canvas, rect, data, img) {
   function drawTitleSplash() {
+    const fontSize = radius / 4;
+    
     context.save();
-    context.fillStyle = 'magenta';
+    
+    context.fillStyle = 'rgb(136, 0, 21)';
+    context.fillRect(0, 0, rect.width, rect.height);
+
+    context.fillStyle = '#ffffff';
     context.textAlign = "center";
     context.textBaseline = "middle";
-    context.font = '80px sans-serif'; // base off of window?
-    context.fillText("Splash Screen FPO", rect.width / 2, rect.height / 2);
+    context.font = `${fontSize}px sans-serif`; // base off of window?
+    context.fillText("Slices", rect.width / 2, rect.height / 2);
     context.restore();    
   }
   
   function drawLegend() {
     function drawMessage(text, y, color) {
       context.save();
+      context.fillStyle = '#ffffff';
+      context.fillText(text, textWidth, y);
       context.fillStyle = color;
       context.fillText(text, textWidth, y);
+
       context.restore();
     }
+    
+    const fontSize = radius / 15;
 
     context.save();
 
     context.textAlign = "left";
     context.textBaseline = "top";
-    context.font = '16px sans-serif'; // base off of window?
+    context.font = `${fontSize}px sans-serif`; // base off of window?
 
     const textWidth = context.measureText('M').width;
     const closeEnoughFontHeight = 1.125 * textWidth;
@@ -41,22 +52,16 @@ export default function drawPi(canvas, rect, data) {
     context.restore();
   }
 
-  function getLineWidth() {
-    const base = 10;
-    
-    return base * data.length;
-  }
-
   function calculateRadius() {
     let radius;
     
     if (rect.width > rect.height) {
-      radius = rect.height;
+      radius = (3/4) * rect.height;
     } else {
-      radius = rect.width;
+      radius = (3/4) * rect.width;
     }
     
-    radius = radius / 2 - lineWidth;
+    radius = radius / 2;
 
     return radius;
   }
@@ -94,7 +99,6 @@ export default function drawPi(canvas, rect, data) {
   }
   
   function drawSegment(name, amount, int) {
-    const context = canvas.getContext('2d');
     const ratio = amount / total;
     const color = sortedColorArray[int];
     const endAngle = startAngle - endAngleRadians(ratio);
@@ -113,22 +117,21 @@ export default function drawPi(canvas, rect, data) {
     startAngle = endAngle;
   }
   
-  const lineWidth = getLineWidth();
   const context = canvas.getContext('2d');
   const radius = calculateRadius();
   
   let sortedData;
   let startAngle = -Math.PI / 2;
-  let total;
+  let total = 1;
   
-  const sortedColorArray = (function(){
+  const sortedColorArray = (function() {
     const arr = [];
 
     for (let i = 1; i < data.length + 1; i++) {
       const rgba = [
-        50,
-        50,
-        50,
+        30,
+        30,
+        30,
       ];
       
       rgba.push(i / data.length);
@@ -142,7 +145,7 @@ export default function drawPi(canvas, rect, data) {
     
     return arr;
   }());
-  
+
   context.clearRect(0, 0, rect.width, rect.height);
 
   if (data.length < 1) {
@@ -182,4 +185,8 @@ export default function drawPi(canvas, rect, data) {
 
     drawLegend();
   }
+
+  const dataURL = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+
+  img.src = dataURL;
 }

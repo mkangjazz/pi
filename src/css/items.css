@@ -1,0 +1,87 @@
+form {
+  margin: 0 auto;
+  max-width: 640px;
+  padding: 1em 1em 3em;
+}
+
+.remove-item {
+  background: none;
+  border: none;
+  position: relative;
+  width: 100%;
+  z-index: 2;
+}
+
+.remove-item span {
+  display: block;
+  height: 2em;
+  position: relative;
+  text-align: left;
+  text-indent: -999em;
+  width: 100%;
+}
+
+.remove-item span:before,
+.remove-item span:after {
+  border-top: 2px solid red;
+  content: "";
+  display: block;
+  left: 50%;
+  margin-left: -.5em;
+  position: absolute;
+  top: 50%;
+  width: 1em;
+}
+
+.remove-item span:before {
+  transform: rotate(45deg);
+}
+
+.remove-item span:after {
+  transform: rotate(-45deg);
+}
+
+table {
+  margin-bottom: 1em;
+  table-layout: fixed;
+  width: 100%;
+}
+
+table th:nth-child(2),
+table td:nth-child(2) {
+  width: 60%;
+}
+
+table th:nth-child(3),
+table td:nth-child(3) {
+  width: 30%;
+}
+
+table th:nth-child(1),
+table td:nth-child(1) {
+  width: 10%;
+}
+
+table th {
+  padding: .25em;
+  text-align: left;
+  font-weight: bold;
+}
+
+table td {
+  padding: .25em;
+  vertical-align: middle;
+}
+
+input {
+  border: 1px solid #333;
+  border-radius: .25em;
+  display: block;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 1.125em;
+  outline: none;
+  max-width: 100%;
+  padding: .25em 0;
+  text-indent: .25em;
+  width: 100%;
+}

@@ -24,7 +24,7 @@ export default function AddItem(props) {
       onClick={addItem}
       type="button"
     >
-      Add Slice
+      Slice
     </button>
   );
 }

@@ -21,7 +21,7 @@ export default function Export(props) {
 
   return (
     <button
-      className="button button-link export-as-image"
+      className="button export-as-image"
       onClick={exportImage}
 //      disabled={canvasData ? false : true}
       type="button"

@@ -18,17 +18,18 @@ export default function Pi(props) {
     const canvas = canvasRef.current;
     const pRect = canvas.parentElement.getBoundingClientRect();
 
-    drawPi(canvas, pRect, props.canvasData);
+    drawPi(canvas, pRect, props.canvasData, props.imgRef.current);
   }, [
     [props]
   ]);
 
   return (
-    <canvas
-      className="pi"
-      id="pi"
-      ref={props.canvasRef}
-    >
-    </canvas>
+    <div className="canvas-wrapper">
+      <canvas
+        id="pi"
+        ref={props.canvasRef}
+      >
+      </canvas>
+    </div>
   );
 }

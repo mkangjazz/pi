@@ -1,0 +1,39 @@
+a:hover,
+.button:hover,
+button:hover {
+  cursor: pointer;
+}
+
+[disabled] {
+  opacity: .25;
+}
+
+[disabled]:hover {
+  cursor: not-allowed;
+}
+
+.actions {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.button {
+  border-radius: .5em;
+  font-size: 1em;
+  margin: 0 auto;
+  padding: .25em 1em;
+  text-decoration: none;
+  width: 47.5%;
+}
+
+.add-item {
+  background-color: #333;
+  border: 2px solid #333;
+  color: #fff;
+  margin-right: auto;
+}
+
+.make-chart {
+  margin-left: auto;
+}

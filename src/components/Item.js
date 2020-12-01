@@ -11,7 +11,7 @@ export default function Item(props) {
       nameRef.focus();
     }
   }
-  
+
   const setAmountRef = (elem) => {
     amountRef = elem;
   }
@@ -19,7 +19,7 @@ export default function Item(props) {
   function handleRemoveClick(e) {
     props.setHiddenItems((curr) => [...curr, `idx-${props.idx}`]);
   }
-      
+
   useEffect(() => {
     props.setInputRefs((prevState) => [
       ...prevState,
@@ -28,6 +28,7 @@ export default function Item(props) {
     ]);
   }, [
     props,
+    handleRemoveClick,
   ]);
 
   return (

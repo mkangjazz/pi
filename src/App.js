@@ -1,5 +1,8 @@
 import './css/reset.css';
 import './css/App.css';
+import './css/buttons.css';
+import './css/items.css';
+import './css/pi.css';
 
 import React, {useEffect, useState} from 'react';
 
@@ -14,10 +17,9 @@ function App() {
   const [hiddenItems, setHiddenItems] = useState([]);
   const [inputRefs, setInputRefs] = useState([]);
   const canvasRef = React.createRef();
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    
+  const imgRef = React.createRef();
+  
+  function processInputData() {
     function getInputValueByName(name) {
       let v;
 
@@ -53,36 +55,52 @@ function App() {
 
       return arr;
     }());
-    
+
     setCanvasData(data);
+  }
+  
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    processInputData();
   }
   
   useEffect(() => {
     updateInputDisplay();
   }, [
-    hiddenItems
+    hiddenItems,
   ]);
 
   function updateInputDisplay() {
     setItems((current) => [...current].filter(item => hiddenItems.indexOf(item.key) === -1));
+    processInputData();
   }
 
   return (
     <div className="App">
+      <header>
+        <h1>Slices</h1>
+      </header>
       <main>
+        <PI
+          canvasData={canvasData}
+          canvasRef={canvasRef}
+          imgRef={imgRef}
+        />
         <section className="mainbar">
-          <figure>
-            <PI
-              canvasData={canvasData}
-              canvasRef={canvasRef}
-            />
-          </figure>
+          <div className="figure-wrapper">
+            <figure>
+              <img 
+                alt="Canvas data renders here"
+                id="imgPi"
+                src=""
+                ref={imgRef}
+              />
+            </figure>
+          </div>
         </section>
         <section className="sidebar">
           <form onSubmit={handleSubmit}>
-            <h1>
-              <span>π</span>
-            </h1>
             {items.length > 0 ? 
               <table>
                 <thead>
@@ -96,10 +114,11 @@ function App() {
                   {items.map((item, index) => item)}
                 </tbody>
               </table>
-              : null
+            : null
             }
             <div className="actions">
               <AddItem 
+                processInputData={processInputData}
                 setInputRefs={setInputRefs}
                 setHiddenItems={setHiddenItems}
                 updateInputDisplay={updateInputDisplay}
@@ -111,18 +130,15 @@ function App() {
                 className="button make-chart"
                 type="submit"
               >
-                Draw
+                π
               </button>
-              <Export
-                canvasRef={canvasRef}
-              />
             </div>
           </form>
-          <footer>
-            <p><small>&copy;{new Date().getFullYear()} Mike Kang</small></p>
-          </footer>
         </section>
       </main>
+      <footer>
+        <p><small>&copy;{new Date().getFullYear()} Mike Kang</small></p>
+      </footer>
     </div>
   );
 }
