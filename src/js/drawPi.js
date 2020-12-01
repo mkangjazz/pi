@@ -25,7 +25,6 @@ export default function drawPi(canvas, rect, data) {
 
     const textWidth = context.measureText('M').width;
     const closeEnoughFontHeight = 1.125 * textWidth;
-    const height = sortedData.length * closeEnoughFontHeight;
     
     for (let i = 0; i < sortedData.length; i++) {
       let k;
@@ -67,13 +66,13 @@ export default function drawPi(canvas, rect, data) {
       let valueA;
       let valueB;
 
-      for (var key in objA) {
+      for (let key in objA) {
         if (objA.hasOwnProperty(key)) {
           valueA = objA[key];
         }
       }
       
-      for (var key in objB) {
+      for (let key in objB) {
         if (objB.hasOwnProperty(key)) {
           valueB = objB[key];
         }
@@ -82,11 +81,7 @@ export default function drawPi(canvas, rect, data) {
       return valueA - valueB;
     }); 
   }
-  
-  function radiansToDegrees(rad) {
-    return rad * 180 / Math.PI;
-  }
-  
+    
   function degreesToRadians(deg) {
     return deg * Math.PI / 180;
   }

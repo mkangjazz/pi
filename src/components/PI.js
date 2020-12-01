@@ -1,7 +1,7 @@
 import setupCanvas from '../js/setupCanvas';
 import drawPi from '../js/drawPi';
 
-import React, {useState, useEffect, useRef, useLayoutEffect} from 'react';
+import React, {useEffect, useLayoutEffect} from 'react';
 
 export default function Pi(props) {
   const canvasRef = props.canvasRef;

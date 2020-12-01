@@ -4,13 +4,11 @@ import './css/App.css';
 import React, {useEffect, useState} from 'react';
 
 import AddItem from './components/AddItem';
-import Item from './components/Item';
 import PI from './components/PI';
 import Export from './components/Export';
 
 function App() {
   const [uID, setUID] = useState(0);
-  const [count, setCount] = useState(1);
   const [canvasData, setCanvasData] = useState([]);
   const [items, setItems] = useState([]);
   const [hiddenItems, setHiddenItems] = useState([]);
@@ -19,20 +17,6 @@ function App() {
 
   function handleSubmit(e) {
     e.preventDefault();
-
-    function getNumberFromNameAttr(el) {
-      const name = el.getAttribute('name');
-      const arr = name.split('_');
-
-      return arr[1];
-    }
-    
-    function getKeyFromNameAttr(el) {
-      const name = el.getAttribute('name');
-      const arr = name.split('_');
-      
-      return arr[0];
-    }
     
     function getInputValueByName(name) {
       let v;
