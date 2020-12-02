@@ -12,13 +12,13 @@ export default function Pi(props) {
     if (canvas) {
       setupCanvas(canvas, canvas.parentElement);
     }
-  }, []);
+  });
 
   useEffect(() => {
     const canvas = canvasRef.current;
     const pRect = canvas.parentElement.getBoundingClientRect();
 
-    drawPi(canvas, pRect, props.canvasData, props.imgRef.current);
+    drawPi(canvas, pRect, props.canvasData, props.imgRef.current, props.selectedColor);
   }, [
     [props]
   ]);

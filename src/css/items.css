@@ -73,7 +73,8 @@ table td {
   vertical-align: middle;
 }
 
-input {
+input[type="text"],
+input[type="number"] {
   border: 1px solid #333;
   border-radius: .25em;
   display: block;
@@ -85,3 +86,8 @@ input {
   text-indent: .25em;
   width: 100%;
 }
+
+input[type="radio"] {
+
+}
+

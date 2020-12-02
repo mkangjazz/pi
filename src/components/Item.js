@@ -27,7 +27,7 @@ export default function Item(props) {
       amountRef,
     ]);
   }, [
-    props,
+    // props,
     handleRemoveClick,
   ]);
 

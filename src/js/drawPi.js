@@ -1,4 +1,4 @@
-export default function drawPi(canvas, rect, data, img) {
+export default function drawPi(canvas, rect, data, img, selectedColor) {
   function drawTitleSplash() {
     const fontSize = radius / 4;
     
@@ -98,9 +98,8 @@ export default function drawPi(canvas, rect, data, img) {
     return angle;
   }
   
-  function drawSegment(name, amount, int) {
+  function drawSegment(name, amount, color) {
     const ratio = amount / total;
-    const color = sortedColorArray[int];
     const endAngle = startAngle - endAngleRadians(ratio);
     
     context.save();
@@ -127,21 +126,12 @@ export default function drawPi(canvas, rect, data, img) {
   const sortedColorArray = (function() {
     const arr = [];
 
-    for (let i = 1; i < data.length + 1; i++) {
-      const rgba = [
-        30,
-        30,
-        30,
-      ];
-      
-      rgba.push(i / data.length);
+    for (let i = 0; i < data.length; i++) {
+      const a = (i / data.length);
+      const str = `rgba(255, 255, 255, ${a})`;
 
-      const str = `rgba(${rgba.join(',')})`;
-      
       arr.push(str);
     }
-    
-    arr.reverse();
     
     return arr;
   }());
@@ -151,6 +141,8 @@ export default function drawPi(canvas, rect, data, img) {
   if (data.length < 1) {
     drawTitleSplash();
   } else {
+    drawSegment('', 1, `rgb(${selectedColor}`);
+
     total = (function() {
       var arr = [];
 
@@ -180,13 +172,15 @@ export default function drawPi(canvas, rect, data, img) {
         }
       }
 
-      drawSegment(k, v, i);
+      const color = sortedColorArray[i];
+
+      drawSegment(k, v, color);
     }
 
     drawLegend();
   }
 
-  const dataURL = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+  const dataURL = canvas.toDataURL("image/png");
 
   img.src = dataURL;
 }
