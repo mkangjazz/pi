@@ -102,7 +102,7 @@ function App() {
 
     setCanvasData(data);
   }
-  
+
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -164,6 +164,7 @@ function App() {
             }
             <div className="actions">
               <AddItem 
+                handleSubmit={handleSubmit}
                 processInputData={processInputData}
                 setInputRefs={setInputRefs}
                 setHiddenItems={setHiddenItems}

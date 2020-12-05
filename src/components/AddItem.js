@@ -2,7 +2,7 @@ import React from 'react';
 import Item from './Item';
 
 export default function AddItem(props) {
-  function addItem() {
+  function addItem(e) {
     props.setItems((current) => [
       ...current,
       <Item
@@ -13,6 +13,8 @@ export default function AddItem(props) {
         setHiddenItems={props.setHiddenItems}
       />
     ]);
+
+    props.handleSubmit(e);
 
     props.setUID(props.uID + 1);
   }
