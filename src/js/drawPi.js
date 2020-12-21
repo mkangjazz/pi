@@ -1,17 +1,13 @@
+import imgSrc from '../img/cover-art.jpg';
+
 export default function drawPi(canvas, rect, data, img, selectedColor) {
   function drawTitleSplash() {
-    const fontSize = radius / 4;
-    
     context.save();
-    
-    context.fillStyle = 'rgb(136, 0, 21)';
-    context.fillRect(0, 0, rect.width, rect.height);
 
-    context.fillStyle = '#ffffff';
-    context.textAlign = "center";
-    context.textBaseline = "middle";
-    context.font = `${fontSize}px sans-serif`; // base off of window?
-    context.fillText("Slices", rect.width / 2, rect.height / 2);
+    context.clearRect(0,0, rect.width, rect.height);
+
+    img.src = imgSrc;
+
     context.restore();    
   }
   
@@ -178,9 +174,9 @@ export default function drawPi(canvas, rect, data, img, selectedColor) {
     }
 
     drawLegend();
+    
+    const dataURL = canvas.toDataURL("image/png");
+
+    img.src = dataURL;
   }
-
-  const dataURL = canvas.toDataURL("image/png");
-
-  img.src = dataURL;
 }
