@@ -1,18 +1,26 @@
 .remove-item {
   background: none;
-  border: none;
+  border: 2px solid transparent;
+  border-radius: 100%;
+  margin: 0;
+  padding: 0;
   position: relative;
-  width: 100%;
   z-index: 2;
+}
+
+.remove-item:focus {
+  border-color: #333;
 }
 
 .remove-item span {
   display: block;
   height: 2em;
+  margin: 0;
+  padding: 0;
   position: relative;
   text-align: left;
   text-indent: -999em;
-  width: 100%;
+  width: 2em;
 }
 
 .remove-item span:before,

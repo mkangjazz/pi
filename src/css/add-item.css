@@ -6,6 +6,10 @@
   margin-right: 0;
 }
 
+.add-item:focus {
+  border-color: #333;
+}
+
 .add-item.rgb-236-122-57 {
   background-color: rgb(236, 122, 57);
 }
