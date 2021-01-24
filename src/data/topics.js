@@ -1,11 +1,20 @@
 const topics = [
   {
-    name: 'Monthly Budget',
-    value: 'Monthly Budget',
+    name: 'Custom',
+    value: 'Custom',
   },
   {
-    name: 'Other',
-    value: 'Other',
+    name: 'Pre-Made Templates',
+    value: [
+      {
+        name: 'Monthly Budget',
+        value: 'Monthly Budget',
+      },
+      {
+        name: 'Net Worth',
+        value: 'Net Worth',
+      },
+    ],
   },
 ];
 

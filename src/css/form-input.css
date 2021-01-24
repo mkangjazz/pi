@@ -1,13 +1,32 @@
 .form-input {
+  appearance: none;
+  -moz-appearance: none; 
+  -webkit-appearance: none; 
+
   border: 1px solid #333;
-  border-radius: .25em;
+  border-radius: 25em;
+  box-sizing: border-box;
   display: block;
   font-family: 'Cabin', sans-serif;
   font-size: 1em;
   outline: none;
   margin: .25em 0;
   max-width: 100%;
-  padding: .25em 0;
-  text-indent: .25em;
+  padding: .25em .5em;
   width: 100%;
+}
+
+.form-input[type="text"],
+.form-input[type="number"] {
+  text-indent: .25em;
+}
+
+select::-ms-expand { 
+  display: none; 
+}
+
+select {
+  background-repeat: no-repeat;
+  background-position: right .25em center;
+  background-size: 12px auto;
 }

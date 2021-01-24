@@ -1,12 +1,11 @@
 import './css/reset.css';
-
 import './css/typography.css';
 import './css/buttons.css';
-
 import './css/App.css';
 import './css/mainbar.css';
 import './css/sidebar.css';
-
+import './css/footer.css';
+import './css/form.css';
 import './css/add-item.css';
 import './css/form-input.css';
 import './css/remove-item.css';
@@ -69,7 +68,7 @@ export default function App() {
       setTopic(topicRef.value);
 
       if (
-        topicRef.value === 'Other' &&
+        topicRef.value === 'Custom' &&
         otherTopicRef
       ) {
         setOtherTopic(otherTopicRef.value);
@@ -171,7 +170,7 @@ export default function App() {
                   onchange={processInputData}
                   reference={setTopicRef}
                 />
-                {topic === 'Other'
+                {topic === 'Custom'
                   ? <input
                       autoFocus
                       className='form-input'
@@ -216,6 +215,7 @@ export default function App() {
             </ol>
             <div className="actions">
               <AddItem
+                selectedColor={selectedColor}
                 processInputData={processInputData}
                 setInputRefs={setInputRefs}
                 setHiddenItems={setHiddenItems}
@@ -224,12 +224,6 @@ export default function App() {
                 setUID={setUID}
                 uID={uID}
               />
-              {/* <button
-                className="button make-chart"
-                type="submit"
-              >
-                Draw
-              </button> */}
             </div>  
           </form>
           <footer>

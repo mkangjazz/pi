@@ -2,7 +2,7 @@ import React from 'react';
 import Item from './Item';
 
 export default function AddItem(props) {
-  function addItem(e) {
+  function handleAddItem(e) {
     props.setItems((current) => [
       ...current,
       <Item
@@ -11,23 +11,23 @@ export default function AddItem(props) {
         updateInputDisplay={props.updateInputDisplay}
         setInputRefs={props.setInputRefs}
         setHiddenItems={props.setHiddenItems}
+        processInputData={props.processInputData}
       />
     ]);
 
     props.processInputData();
-    // props.handleSubmit(e);
 
     props.setUID(props.uID + 1);
   }
 
   return (
     <button
-      className="button add-item"
+      className={`button add-item rgb-${props.selectedColor.replace(/\s/g, '').replace(/,/g, '-')}`}
       id="add-item"
-      onClick={addItem}
+      onClick={handleAddItem}
       type="button"
     >
-      Add
+      ++
     </button>
   );
 }

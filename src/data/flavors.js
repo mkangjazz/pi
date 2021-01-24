@@ -1,7 +1,7 @@
 const topics = [
   {
     name: 'Pumpkin',
-    value: '255, 117, 24',
+    value: '236, 122, 57',
   },
   {
     name: 'Raspberry',

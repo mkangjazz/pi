@@ -16,6 +16,11 @@ export default function Item(props) {
     amountRef = elem;
   }
 
+  function handleInputChange(e) {
+    console.log('handleInputChange', props);
+    // props.processInputData();
+  }
+
   function handleRemoveClick(e) {
     props.setHiddenItems((curr) => [...curr, `idx-${props.idx}`]);
   }
@@ -27,7 +32,6 @@ export default function Item(props) {
       amountRef,
     ]);
   }, [
-    // props,
     handleRemoveClick,
   ]);
 
@@ -50,6 +54,7 @@ export default function Item(props) {
           autoFocus
           className='form-input'
           name={`name_${props.idx}`}
+          onChange={handleInputChange}
           ref={setNameRef}
           type="text"
         />
@@ -58,6 +63,7 @@ export default function Item(props) {
         <input
           className='form-input'
           name={`amount_${props.idx}`}
+          onChange={handleInputChange}
           ref={setAmountRef}
           type="number"
         />

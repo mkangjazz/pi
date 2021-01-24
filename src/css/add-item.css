@@ -1,6 +1,15 @@
 .add-item {
   background-color: #333;
-  border: 2px solid #333;
+  border: 2px solid transparent;
   color: #fff;
+  font-weight: bold;
   margin-right: 0;
+}
+
+.add-item.rgb-236-122-57 {
+  background-color: rgb(236, 122, 57);
+}
+
+.add-item.rgb-227-11-93 {
+  background-color: rgb(227, 11, 93);
 }

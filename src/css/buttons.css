@@ -19,10 +19,10 @@ button:hover {
 }
 
 .button {
-  border-radius: .5em;
+  border-radius: 25em;
   font-size: 1.125em;
   margin: 0 auto;
-  padding: .75em 1em;
+  padding: .5em .75em;
   text-decoration: none;
   width: 47.5%;
 }
