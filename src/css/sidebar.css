@@ -10,6 +10,14 @@
   padding: 1em 1em 3em;
 }
 
+.sidebar form ol {
+  list-style: decimal;
+  margin-left: 1em;
+}
+
+.sidebar form li {
+  margin-bottom: 1.5em;
+}
 
 @media all and (min-width: 800px) {
   .sidebar {

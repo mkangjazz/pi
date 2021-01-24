@@ -1,6 +1,6 @@
 import imgSrc from '../img/cover-art-final.gif';
 
-export default function drawPi(canvas, rect, data, img, selectedColor) {
+export default function drawPi(canvas, rect, data, img, selectedColor, topic) {
   function drawTitleSplash() {
     context.save();
 
@@ -8,13 +8,28 @@ export default function drawPi(canvas, rect, data, img, selectedColor) {
 
     img.setAttribute('src', imgSrc);
 
-    context.restore();    
+    context.restore();
   }
-  
+
+  function drawTopic() {
+    context.save();
+
+    const fontFamily = window.getComputedStyle(document.body, null).getPropertyValue('font-family');
+    const fontSize = 20;
+
+    context.textAlign = "left";
+    context.font = `bold ${fontSize}px ${fontFamily}`; // base off of window?
+
+    context.fillStyle = '#333333';
+    context.fillText(topic, fontSize, fontSize * 2);
+
+    context.restore();
+  }
+
   function drawLegend() {
     function drawMessage(text, y, color) {
       context.save();
-      context.fillStyle = '#ffffff';
+      context.fillStyle = '#333333';
       context.fillText(text, textWidth, y);
       context.fillStyle = color;
       context.fillText(text, textWidth, y);
@@ -42,7 +57,7 @@ export default function drawPi(canvas, rect, data, img, selectedColor) {
         }
       }
 
-      drawMessage(k, i * closeEnoughFontHeight + closeEnoughFontHeight, sortedColorArray[i]);
+      drawMessage(k, 40 + i * closeEnoughFontHeight + closeEnoughFontHeight, sortedColorArray[i]);
     }
     
     context.restore();
@@ -173,6 +188,7 @@ export default function drawPi(canvas, rect, data, img, selectedColor) {
       drawSegment(k, v, color);
     }
 
+    drawTopic();
     drawLegend();
     
     const dataURL = canvas.toDataURL("image/png");

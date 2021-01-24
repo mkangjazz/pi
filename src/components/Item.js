@@ -47,6 +47,7 @@ export default function Item(props) {
       </td>
       <td>
         <input
+          autoFocus
           className='form-input'
           name={`name_${props.idx}`}
           ref={setNameRef}

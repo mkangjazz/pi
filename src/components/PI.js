@@ -18,7 +18,16 @@ export default function Pi(props) {
     const canvas = canvasRef.current;
     const pRect = canvas.parentElement.getBoundingClientRect();
 
-    drawPi(canvas, pRect, props.canvasData, props.imgRef.current, props.selectedColor);
+    let topic = '';
+
+    console.log(props);
+    if (props.otherTopic !== '') {
+      topic = props.otherTopic;
+    } else {
+      topic = props.topic;
+    }
+
+    drawPi(canvas, pRect, props.canvasData, props.imgRef.current, props.selectedColor, topic);
   }, [
     [props]
   ]);

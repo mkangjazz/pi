@@ -13,66 +13,71 @@ import './css/remove-item.css';
 import './css/pi-orities.css';
 import './css/pi.css';
 
-import React, {useEffect, useState} from 'react';
+import topics from './data/topics';
+import flavors from './data/flavors';
 
+import React, { useEffect, useState } from 'react';
+
+import Select from './components/Select';
 import AddItem from './components/AddItem';
-import Item from './components/Item';
 import PI from './components/PI';
 
-function App() {
-  const defaultColor = '255, 117, 24';
+export default function App() {
+  const [topic, setTopic] = useState('');
+  const [otherTopic, setOtherTopic] = useState('');
 
-  const [uID, setUID] = useState(1);
+  const [uID, setUID] = useState(0);
   const [hiddenItems, setHiddenItems] = useState([]);
   const [inputRefs, setInputRefs] = useState([]);
   const [canvasData, setCanvasData] = useState([]);
-  const [selectedColor, setSelectedColor] = useState(defaultColor);
-  const [items, setItems] = useState([
-    <Item
-      autofocus={true}
-      key={`idx-0`}
-      idx={`0`}
-      updateInputDisplay={updateInputDisplay}
-      setInputRefs={setInputRefs}
-      setHiddenItems={setHiddenItems}
-    />
-  ]);
+  const [selectedColor, setSelectedColor] = useState(topics[0].value);
+  const [items, setItems] = useState([]);
+
+  let topicRef = null;
+
+  const setTopicRef = (elem) => {
+    topicRef = elem;
+  }
+
+  let otherTopicRef = null;
+
+  const setOtherTopicRef = (elem) => {
+    otherTopicRef = elem;
+  }
+
+  let selectColorRef = null;
+
+  const setSelectColorRef = (elem) => {
+    selectColorRef = elem;
+  }
+
+  let formRef = null;
+
+  const setFormRef = (elem) => {
+    formRef = elem;
+  }
+
   const canvasRef = React.createRef();
   const imgRef = React.createRef();
 
-  const colorInputs = () => {
-    const colors = [
-      {
-        name: 'pumpkin',
-        rgb: defaultColor,
-      },
-      {
-        name: 'raspberry',
-        rgb: '227, 11, 93',
-      },
-    ];
-
-    const arr = colors.map((el, i) => (
-      <label key={el.name}>
-        <input
-          checked={el.rgb === selectedColor ? true : false}
-          name='[]'
-          onChange={handleRadioChange}
-          type='radio'
-          value={el.rgb}
-      />
-        {el.name}
-      </label>
-    ));
-
-    return arr;
-  };
-
-  function handleRadioChange(e) {
-   setSelectedColor(e.target.value);
-  }
-
   function processInputData() {
+    if (selectColorRef) {
+      setSelectedColor(selectColorRef.value);
+    }
+
+    if (topicRef) {
+      setTopic(topicRef.value);
+
+      if (
+        topicRef.value === 'Other' &&
+        otherTopicRef
+      ) {
+        setOtherTopic(otherTopicRef.value);
+      } else {
+        setOtherTopic('');
+      }  
+    }
+
     function getInputValueByName(name) {
       let v;
 
@@ -85,7 +90,7 @@ function App() {
       return v;
     }
 
-    const data = (function() {
+    const data = (function () {
       const arr = [];
 
       for (let i = 0; i < uID; i++) {
@@ -137,11 +142,13 @@ function App() {
           canvasData={canvasData}
           canvasRef={canvasRef}
           imgRef={imgRef}
+          otherTopic={otherTopic}
+          topic={topic}
         />
         <section className="mainbar">
           <div className="figure-wrapper">
             <figure>
-              <img 
+              <img
                 alt="Canvas data renders here"
                 id="imgPi"
                 src=""
@@ -152,69 +159,78 @@ function App() {
         </section>
         <section className="sidebar">
           <h1>π-orities</h1>
-          <form onSubmit={handleSubmit}>
-            <div className='title'>
-              <label>
-                <strong>Topic</strong>
-                <select className='form-input'>
-                  <option>Monthly Budget</option>
-                  <option>Other</option>
-                  {/* {colorInputs()} */}
-                </select>
-                <input
-                 className='form-input'
-                  name="topic"
-                  type="text" />
-              </label>
-            </div>
-            <div className="color-picker">
-              <label>
-                <strong>Flavor</strong>
-                <select className='form-input'>
-                  <option>Pumpkin</option>
-                  <option>Lemon</option>
-                  <option>Raspberry</option>
-                  {/* {colorInputs()} */}
-                </select>
-              </label>
-            </div>
-            <div className='pi-orities'>
-              {items.length > 0 ? 
-                <>
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>&nbsp;</th>
-                        <th>π-ority</th>
-                        <th>Amount</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {items.map((item, index) => item)}
-                    </tbody>
-                  </table>
-                </>
-              : null
-              }
-              <div className="actions">
-                <AddItem 
-                  handleSubmit={handleSubmit}
-                  processInputData={processInputData}
-                  setInputRefs={setInputRefs}
-                  setHiddenItems={setHiddenItems}
-                  updateInputDisplay={updateInputDisplay}
-                  setItems={setItems}
-                  setUID={setUID}
-                  uID={uID}
+          <form
+            ref={setFormRef}
+            onSubmit={handleSubmit}
+          >
+            <ol>
+              <li>
+                <Select 
+                  label='Choose a Topic'
+                  options={topics}
+                  onchange={processInputData}
+                  reference={setTopicRef}
                 />
-                {/* <button
-                  className="button make-chart"
-                  type="submit"
-                >
-                  Draw
-                </button> */}
-              </div>
-            </div>
+                {topic === 'Other'
+                  ? <input
+                      autoFocus
+                      className='form-input'
+                      name="topic"
+                      onChange={processInputData}
+                      ref={setOtherTopicRef}
+                      type="text"
+                    />
+                  : null
+                }
+              </li>
+              <li>
+                <Select 
+                  label='Pick a Flavor'
+                  options={flavors}
+                  onchange={processInputData}
+                  reference={setSelectColorRef}
+                />
+              </li>
+              <li>
+                <div className='pi-orities'>
+                  <label>
+                    <strong>Add π-orities</strong>
+                  </label>
+                  {items.length > 0 ?
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>&nbsp;</th>
+                          <th>π-ority</th>
+                          <th>Amount</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {items.map((item, index) => item)}
+                      </tbody>
+                    </table>
+                    : null
+                  }
+                </div>
+              </li>
+            </ol>
+            <div className="actions">
+              <AddItem
+                processInputData={processInputData}
+                setInputRefs={setInputRefs}
+                setHiddenItems={setHiddenItems}
+                updateInputDisplay={updateInputDisplay}
+                setItems={setItems}
+                setUID={setUID}
+                uID={uID}
+              />
+              {/* <button
+                className="button make-chart"
+                type="submit"
+              >
+                Draw
+              </button> */}
+            </div>  
           </form>
           <footer>
             <p><small>&copy;{new Date().getFullYear()} Mike Kang</small></p>
@@ -224,5 +240,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

@@ -14,7 +14,8 @@ export default function AddItem(props) {
       />
     ]);
 
-    props.handleSubmit(e);
+    props.processInputData();
+    // props.handleSubmit(e);
 
     props.setUID(props.uID + 1);
   }
@@ -26,7 +27,7 @@ export default function AddItem(props) {
       onClick={addItem}
       type="button"
     >
-      Add π-ority
+      Add
     </button>
   );
 }
