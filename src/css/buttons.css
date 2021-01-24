@@ -26,14 +26,3 @@ button:hover {
   text-decoration: none;
   width: 47.5%;
 }
-
-.add-item {
-  background-color: #333;
-  border: 2px solid #333;
-  color: #fff;
-  margin-right: auto;
-}
-
-.make-chart {
-  margin-left: auto;
-}

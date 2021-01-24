@@ -1,0 +1,10 @@
+.mainbar {
+  margin-right: auto;
+  position: relative;
+}
+
+@media all and (min-width: 800px) {
+  .mainbar {
+    width: 69%;
+  } 
+}

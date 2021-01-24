@@ -1,7 +1,16 @@
 import './css/reset.css';
-import './css/App.css';
+
+import './css/typography.css';
 import './css/buttons.css';
-import './css/items.css';
+
+import './css/App.css';
+import './css/mainbar.css';
+import './css/sidebar.css';
+
+import './css/add-item.css';
+import './css/form-input.css';
+import './css/remove-item.css';
+import './css/pi-orities.css';
 import './css/pi.css';
 
 import React, {useEffect, useState} from 'react';
@@ -130,7 +139,6 @@ function App() {
           imgRef={imgRef}
         />
         <section className="mainbar">
-          <h1>Slices</h1>
           <div className="figure-wrapper">
             <figure>
               <img 
@@ -143,42 +151,69 @@ function App() {
           </div>
         </section>
         <section className="sidebar">
+          <h1>π-orities</h1>
           <form onSubmit={handleSubmit}>
-            <div className="color-picker">
-              {colorInputs()}
+            <div className='title'>
+              <label>
+                <strong>Topic</strong>
+                <select className='form-input'>
+                  <option>Monthly Budget</option>
+                  <option>Other</option>
+                  {/* {colorInputs()} */}
+                </select>
+                <input
+                 className='form-input'
+                  name="topic"
+                  type="text" />
+              </label>
             </div>
-            {items.length > 0 ? 
-              <table>
-                <thead>
-                  <tr>
-                    <th>&nbsp;</th>
-                    <th>Name</th>
-                    <th>Amount</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {items.map((item, index) => item)}
-                </tbody>
-              </table>
-            : null
-            }
-            <div className="actions">
-              <AddItem 
-                handleSubmit={handleSubmit}
-                processInputData={processInputData}
-                setInputRefs={setInputRefs}
-                setHiddenItems={setHiddenItems}
-                updateInputDisplay={updateInputDisplay}
-                setItems={setItems}
-                setUID={setUID}
-                uID={uID}
-              />
-              <button
-                className="button make-chart"
-                type="submit"
-              >
-                Draw
-              </button>
+            <div className="color-picker">
+              <label>
+                <strong>Flavor</strong>
+                <select className='form-input'>
+                  <option>Pumpkin</option>
+                  <option>Lemon</option>
+                  <option>Raspberry</option>
+                  {/* {colorInputs()} */}
+                </select>
+              </label>
+            </div>
+            <div className='pi-orities'>
+              {items.length > 0 ? 
+                <>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>&nbsp;</th>
+                        <th>π-ority</th>
+                        <th>Amount</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {items.map((item, index) => item)}
+                    </tbody>
+                  </table>
+                </>
+              : null
+              }
+              <div className="actions">
+                <AddItem 
+                  handleSubmit={handleSubmit}
+                  processInputData={processInputData}
+                  setInputRefs={setInputRefs}
+                  setHiddenItems={setHiddenItems}
+                  updateInputDisplay={updateInputDisplay}
+                  setItems={setItems}
+                  setUID={setUID}
+                  uID={uID}
+                />
+                {/* <button
+                  className="button make-chart"
+                  type="submit"
+                >
+                  Draw
+                </button> */}
+              </div>
             </div>
           </form>
           <footer>

@@ -1,0 +1,13 @@
+.form-input {
+  border: 1px solid #333;
+  border-radius: .25em;
+  display: block;
+  font-family: 'Cabin', sans-serif;
+  font-size: 1em;
+  outline: none;
+  margin: .25em 0;
+  max-width: 100%;
+  padding: .25em 0;
+  text-indent: .25em;
+  width: 100%;
+}

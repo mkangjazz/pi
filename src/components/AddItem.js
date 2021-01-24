@@ -26,7 +26,7 @@ export default function AddItem(props) {
       onClick={addItem}
       type="button"
     >
-      Slice
+      Add π-ority
     </button>
   );
 }

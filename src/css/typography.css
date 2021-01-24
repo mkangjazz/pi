@@ -1,0 +1,27 @@
+html,
+body {
+  font-family: 'Cabin', sans-serif;
+}
+
+h1 {
+  font-size: 2em;
+  padding: 1em 2em;
+  text-align: center;
+}
+
+.title,
+.color-picker {
+  margin-bottom: 1em;
+}
+
+.color-picker strong {
+  display: block;
+}
+
+small {
+  font-size: .75em;
+}
+
+strong {
+  font-weight: bold;
+}

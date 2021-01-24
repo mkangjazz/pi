@@ -1,0 +1,32 @@
+.pi-orities table {
+  margin-bottom: 1em;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.pi-orities th:nth-child(2),
+.pi-orities td:nth-child(2) {
+  width: 60%;
+}
+
+.pi-orities th:nth-child(3),
+.pi-orities td:nth-child(3) {
+  width: 30%;
+}
+
+.pi-orities th:nth-child(1),
+.pi-orities td:nth-child(1) {
+  width: 10%;
+}
+
+.pi-orities th {
+  font-size: .85em;
+  font-weight: bold;
+  padding: .25em;
+  text-align: left;
+}
+
+.pi-orities td {
+  padding: .25em;
+  vertical-align: middle;
+}

@@ -1,0 +1,36 @@
+.remove-item {
+  background: none;
+  border: none;
+  position: relative;
+  width: 100%;
+  z-index: 2;
+}
+
+.remove-item span {
+  display: block;
+  height: 2em;
+  position: relative;
+  text-align: left;
+  text-indent: -999em;
+  width: 100%;
+}
+
+.remove-item span:before,
+.remove-item span:after {
+  border-top: 2px solid red;
+  content: "";
+  display: block;
+  left: 50%;
+  margin-left: -.5em;
+  position: absolute;
+  top: 50%;
+  width: 1em;
+}
+
+.remove-item span:before {
+  transform: rotate(45deg);
+}
+
+.remove-item span:after {
+  transform: rotate(-45deg);
+}

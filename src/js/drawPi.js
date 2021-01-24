@@ -1,4 +1,4 @@
-import imgSrc from '../img/cover-art.jpg';
+import imgSrc from '../img/cover-art-final.gif';
 
 export default function drawPi(canvas, rect, data, img, selectedColor) {
   function drawTitleSplash() {
@@ -6,7 +6,7 @@ export default function drawPi(canvas, rect, data, img, selectedColor) {
 
     context.clearRect(0,0, rect.width, rect.height);
 
-    img.src = imgSrc;
+    img.setAttribute('src', imgSrc);
 
     context.restore();    
   }
@@ -177,6 +177,6 @@ export default function drawPi(canvas, rect, data, img, selectedColor) {
     
     const dataURL = canvas.toDataURL("image/png");
 
-    img.src = dataURL;
+    img.setAttribute('src', dataURL);
   }
 }

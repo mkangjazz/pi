@@ -47,6 +47,7 @@ export default function Item(props) {
       </td>
       <td>
         <input
+          className='form-input'
           name={`name_${props.idx}`}
           ref={setNameRef}
           type="text"
@@ -54,6 +55,7 @@ export default function Item(props) {
       </td>
       <td>
         <input
+          className='form-input'
           name={`amount_${props.idx}`}
           ref={setAmountRef}
           type="number"
