@@ -14,6 +14,7 @@ import './css/pi.css';
 
 import topics from './data/topics';
 import flavors from './data/flavors';
+import monthlyBudget from './data/templates/monthlyBudget';
 
 import React, { useEffect, useState } from 'react';
 
