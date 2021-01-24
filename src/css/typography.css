@@ -9,15 +9,6 @@ h1 {
   text-align: center;
 }
 
-.title,
-.color-picker {
-  margin-bottom: 1em;
-}
-
-.color-picker strong {
-  display: block;
-}
-
 small {
   font-size: .75em;
 }

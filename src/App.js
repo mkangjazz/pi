@@ -56,6 +56,7 @@ export default function App() {
     formRef = elem;
   }
 
+  // refactor these to callback, too?
   const canvasRef = React.createRef();
   const imgRef = React.createRef();
 
@@ -116,6 +117,14 @@ export default function App() {
     setCanvasData(data);
   }
 
+  function handleTopicChange(e) {
+    processInputData();
+  }
+
+  function handleColorChange(e) {
+    processInputData();
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -167,7 +176,7 @@ export default function App() {
                 <Select 
                   label='Choose a Topic'
                   options={topics}
-                  onchange={processInputData}
+                  onchange={handleTopicChange}
                   reference={setTopicRef}
                 />
                 {topic === 'Custom'
@@ -186,7 +195,7 @@ export default function App() {
                 <Select 
                   label='Pick a Flavor'
                   options={flavors}
-                  onchange={processInputData}
+                  onchange={handleColorChange}
                   reference={setSelectColorRef}
                 />
               </li>

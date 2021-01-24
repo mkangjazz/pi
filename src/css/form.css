@@ -12,3 +12,8 @@ form ol {
 form li {
   margin-bottom: 1.5em;
 }
+
+form label strong {
+  display: block;
+  margin-bottom: .5em;
+}
