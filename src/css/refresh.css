@@ -1,0 +1,18 @@
+.refresh {
+  background-color: transparent;
+  border: 2px solid transparent;
+  border-radius: 100%;
+  background-size: .75em auto;
+  background-position: center center;
+  background-repeat: no-repeat;
+  border: none;
+  height: 1.25em;
+  margin-right: 0;
+  padding: 0;
+  text-indent: -999em;
+  width: 1.25em;
+}
+
+.refresh:focus {
+  border: 2px solid #333;
+}

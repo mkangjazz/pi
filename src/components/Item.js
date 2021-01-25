@@ -1,49 +1,58 @@
-import React, {useEffect} from 'react';
+import prepArray from '../js/prepArray';
 
 export default function Item(props) {
-  let nameRef = null;
-  let amountRef = null;
-  
-  const setNameRef = (elem) => {
-    nameRef = elem;
-    
-    if (nameRef) {
-      nameRef.focus();
-    }
+  function handleNameChange(e) {
+    const idx = e.target.getAttribute('data-idx');
+    const newItems = [...props.items];
+
+    newItems.map(obj => {
+      const o = obj;
+
+      if (o.idx === idx) {
+        o.name = e.target.value;
+      }
+
+      return o;
+    });
+
+    // props.setItems(prepArray(newItems));
   }
 
-  const setAmountRef = (elem) => {
-    amountRef = elem;
-  }
+  function handleAmountChange(e) {
+    const idx = e.target.getAttribute('data-idx');
+    const newItems = [...props.items];
 
-  function handleInputChange(e) {
-    console.log('handleInputChange', props);
-    // props.processInputData();
+    newItems.map(obj => {
+      const o = obj;
+
+      if (o.idx === idx) {
+        o.amount = Number(e.target.value);
+      }
+
+      return o;
+    });
+
+    // props.setItems(prepArray(newItems));
   }
 
   function handleRemoveClick(e) {
-    props.setHiddenItems((curr) => [...curr, `idx-${props.idx}`]);
-  }
+    const idx = e.target.getAttribute('data-idx');
+    const newItems = [...props.items].filter(obj => {
+      return obj.idx !== idx;
+    });
 
-  useEffect(() => {
-    props.setInputRefs((prevState) => [
-      ...prevState,
-      nameRef,
-      amountRef,
-    ]);
-  }, [
-    handleRemoveClick,
-  ]);
+    props.setItems(prepArray(newItems));
+  }
 
   return (
     <tr 
       className="item"
-      data-idx={`idx-${props.idx}`}
     >
       <td>
         <button
           className="remove-item"
           onClick={handleRemoveClick}
+          data-idx={props.idx}
           type="button"
         >
           <span>Remove Item</span>
@@ -53,18 +62,18 @@ export default function Item(props) {
         <input
           autoFocus
           className='form-input'
-          name={`name_${props.idx}`}
-          onChange={handleInputChange}
-          ref={setNameRef}
+          data-idx={props.idx}
+          defaultValue={props.name}
+          onChange={handleNameChange}
           type="text"
         />
       </td>
       <td>
         <input
           className='form-input'
-          name={`amount_${props.idx}`}
-          onChange={handleInputChange}
-          ref={setAmountRef}
+          data-idx={props.idx}
+          defaultValue={props.amount}
+          onChange={handleAmountChange}
           type="number"
         />
       </td>

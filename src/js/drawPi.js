@@ -1,5 +1,7 @@
 import imgSrc from '../img/cover-art-final.gif';
 
+import degreesToRadians from './degreesToRadians';
+
 export default function drawPi(canvas, rect, data, img, selectedColor, topic) {
   function drawTitleSplash() {
     context.save();
@@ -17,11 +19,11 @@ export default function drawPi(canvas, rect, data, img, selectedColor, topic) {
     const fontFamily = window.getComputedStyle(document.body, null).getPropertyValue('font-family');
     const fontSize = 20;
 
-    context.textAlign = "left";
+    context.textAlign = "center";
     context.font = `bold ${fontSize}px ${fontFamily}`; // base off of window?
 
     context.fillStyle = '#333333';
-    context.fillText(topic, fontSize, fontSize * 2);
+    context.fillText(topic, rect.width / 2, fontSize * 2);
 
     context.restore();
   }
@@ -76,32 +78,7 @@ export default function drawPi(canvas, rect, data, img, selectedColor, topic) {
 
     return radius;
   }
-  
-  function sortData(data) {
-    return data.sort(function(objB, objA) {
-      let valueA;
-      let valueB;
-
-      for (let key in objA) {
-        if (objA.hasOwnProperty(key)) {
-          valueA = objA[key];
-        }
-      }
-      
-      for (let key in objB) {
-        if (objB.hasOwnProperty(key)) {
-          valueB = objB[key];
-        }
-      }
-      
-      return valueA - valueB;
-    }); 
-  }
     
-  function degreesToRadians(deg) {
-    return deg * Math.PI / 180;
-  }
-  
   function endAngleRadians(r) {
     const radians360 = degreesToRadians(360);
     const angle = r * radians360;
@@ -109,8 +86,7 @@ export default function drawPi(canvas, rect, data, img, selectedColor, topic) {
     return angle;
   }
   
-  function drawSegment(name, amount, color) {
-    const ratio = amount / total;
+  function drawSegment(name, ratio, color) {
     const endAngle = startAngle - endAngleRadians(ratio);
     
     context.save();
@@ -132,8 +108,7 @@ export default function drawPi(canvas, rect, data, img, selectedColor, topic) {
   
   let sortedData;
   let startAngle = -Math.PI / 2;
-  let total = 1;
-  
+
   const sortedColorArray = (function() {
     const arr = [];
 
@@ -152,45 +127,19 @@ export default function drawPi(canvas, rect, data, img, selectedColor, topic) {
   if (data.length < 1) {
     drawTitleSplash();
   } else {
-    drawSegment('', 1, `rgb(${selectedColor}`);
+    const total = data.reduce((accum, curr) => Number(accum) + Number(curr.amount), 0);
 
-    total = (function() {
-      var arr = [];
+    drawSegment('', total / total, `rgb(${selectedColor}`);
 
-      for (let i = 0; i < data.length; i++) {
-        for (var key in data[i]) {
-          if (data[i].hasOwnProperty(key)) {
-            arr.push(data[i][key]);
-          }
-        }
-      }
-
-      if (arr.length > 0) {
-        return arr.reduce((accum, curr) => Number(accum) + Number(curr));        
-      }
-    }());
-
-    sortedData = sortData(data);
-
-    for (let i = 0; i < sortedData.length; i++) {
-      let k;
-      let v;
-
-      for (var key in sortedData[i]) {
-        if (sortedData[i].hasOwnProperty(key)) {
-          k = key;
-          v = sortedData[i][key];
-        }
-      }
-
-      const color = sortedColorArray[i];
-
-      drawSegment(k, v, color);
+    for (let i = 0; i < data.length; i += 1) {
+      const ratio = data[i].amount / total;
+ 
+      drawSegment(data[i].name, ratio, sortedColorArray[i]);
     }
 
     drawTopic();
-    drawLegend();
-    
+    // drawLegend();
+
     const dataURL = canvas.toDataURL("image/png");
 
     img.setAttribute('src', dataURL);

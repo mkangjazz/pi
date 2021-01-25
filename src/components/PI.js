@@ -1,42 +1,37 @@
 import setupCanvas from '../js/setupCanvas';
 import drawPi from '../js/drawPi';
 
-import React, {useEffect, useLayoutEffect} from 'react';
+import React, {useLayoutEffect} from 'react';
 
 export default function Pi(props) {
-  const canvasRef = props.canvasRef;
+  const canvasRef = React.createRef();
   
   useLayoutEffect(function() {
     const canvas = canvasRef.current;
 
     if (canvas) {
       setupCanvas(canvas, canvas.parentElement);
+      
+      const pRect = canvas.parentElement.getBoundingClientRect();
+    
+      if (props.imgRef.current) {
+        drawPi(
+          canvas,
+          pRect,
+          props.items.filter(obj => obj.amount > 0),
+          props.imgRef.current,
+          props.color,
+          props.otherTopic !== '' ? props.otherTopic : props.topic
+        );        
+      }
     }
   });
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const pRect = canvas.parentElement.getBoundingClientRect();
-
-    let topic = '';
-
-    console.log(props);
-    if (props.otherTopic !== '') {
-      topic = props.otherTopic;
-    } else {
-      topic = props.topic;
-    }
-
-    drawPi(canvas, pRect, props.canvasData, props.imgRef.current, props.selectedColor, topic);
-  }, [
-    [props]
-  ]);
 
   return (
     <div className="canvas-wrapper">
       <canvas
         id="pi"
-        ref={props.canvasRef}
+        ref={canvasRef}
       >
       </canvas>
     </div>

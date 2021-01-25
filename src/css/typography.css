@@ -5,8 +5,8 @@ body {
 
 h1 {
   font-size: 2em;
-  padding: 1em 2em;
-  text-align: center;
+  padding: .5em 0 1em;
+  text-align: left;
 }
 
 small {

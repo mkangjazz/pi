@@ -25,9 +25,9 @@ button:hover {
 
 .button {
   border-radius: 25em;
-  font-size: 1.125em;
+  font-size: 2em;
   margin: 0 auto;
-  padding: .5em .75em;
+  padding: .125em 0m;
   text-decoration: none;
   width: 47.5%;
 }

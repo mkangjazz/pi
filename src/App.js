@@ -11,182 +11,91 @@ import './css/form-input.css';
 import './css/remove-item.css';
 import './css/pi-orities.css';
 import './css/pi.css';
+import './css/refresh.css';
 
 import topics from './data/topics';
 import flavors from './data/flavors';
-import monthlyBudget from './data/templates/monthlyBudget';
+// import monthlyBudget from './data/templates/monthlyBudget';
 
-import React, { useEffect, useState } from 'react';
+import refresh from './img/refresh.png';
+
+import prepArray from './js/prepArray';
+
+import React, {useState } from 'react';
 
 import Select from './components/Select';
+import Item from './components/Item';
 import AddItem from './components/AddItem';
 import PI from './components/PI';
 
-export default function App() {
-  const [topic, setTopic] = useState('');
+export default function App() { 
+  const defaultItems = prepArray(
+    [
+      {
+        amount: 20,
+        name: 'x',
+      },
+      {
+        amount: 15,
+        name: 'y',
+      },
+      {
+        amount: 30,
+        name: 'z',
+      },
+    ]
+  );
+
+  const [topic, setTopic] = useState(topics[0].value);
   const [otherTopic, setOtherTopic] = useState('');
+  const [items, setItems] = useState(defaultItems);
+  const [color, setColor] = useState(flavors[0].value);  
 
-  const [uID, setUID] = useState(0);
-  const [hiddenItems, setHiddenItems] = useState([]);
-  const [inputRefs, setInputRefs] = useState([]);
-  const [canvasData, setCanvasData] = useState([]);
-  const [selectedColor, setSelectedColor] = useState(topics[0].value);
-  const [items, setItems] = useState([]);
-
-  let topicRef = null;
-
-  const setTopicRef = (elem) => {
-    topicRef = elem;
-  }
-
-  let otherTopicRef = null;
-
-  const setOtherTopicRef = (elem) => {
-    otherTopicRef = elem;
-  }
-
-  let selectColorRef = null;
-
-  const setSelectColorRef = (elem) => {
-    selectColorRef = elem;
-  }
-
-  let formRef = null;
-
-  const setFormRef = (elem) => {
-    formRef = elem;
-  }
-
-  // refactor these to callback, too?
-  const canvasRef = React.createRef();
   const imgRef = React.createRef();
 
-  function processInputData() {
-    if (selectColorRef) {
-      setSelectedColor(selectColorRef.value);
-    }
-
-    if (topicRef) {
-      setTopic(topicRef.value);
-
-      if (
-        topicRef.value === 'Custom' &&
-        otherTopicRef
-      ) {
-        setOtherTopic(otherTopicRef.value);
-      } else {
-        setOtherTopic('');
-      }  
-    }
-
-    function getInputValueByName(name) {
-      let v;
-
-      for (let j = 0; j < inputRefs.length; j++) {
-        if (inputRefs[j].getAttribute('name') === name) {
-          v = inputRefs[j].value;
-        }
-      }
-
-      return v;
-    }
-
-    const data = (function () {
-      const arr = [];
-
-      for (let i = 0; i < uID; i++) {
-        if (hiddenItems.indexOf(`idx-${i}`) !== -1) {
-          continue;
-        }
-
-        const obj = {};
-        const targetName = `name_${i}`;
-        const targetAmount = `amount_${i}`;
-        const key = getInputValueByName(targetName);
-        const value = getInputValueByName(targetAmount);
-
-        if (key && value) {
-          obj[key] = value;
-
-          arr.push(obj);
-        }
-      }
-
-      return arr;
-    }());
-
-    setCanvasData(data);
+  function handleOtherTopicChange(e) {
+    setOtherTopic(e.target.value);
   }
 
   function handleTopicChange(e) {
-    processInputData();
+    setTopic(e.target.value);
+
+    if (e.target.value !== 'Custom') {
+      setOtherTopic('');
+    }
   }
 
   function handleColorChange(e) {
-    processInputData();
+    setColor(e.target.value);
   }
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    processInputData();
+    setItems(curr => prepArray([...curr]));
   }
-
-  function updateInputDisplay() {
-    setItems((current) => [...current].filter(item => hiddenItems.indexOf(item.key) === -1));
-    processInputData();
-  }
-
-  useEffect(() => {
-    updateInputDisplay();
-  }, [
-    hiddenItems,
-  ]);
 
   return (
     <div className="App">
       <main>
-        <PI
-          selectedColor={selectedColor}
-          canvasData={canvasData}
-          canvasRef={canvasRef}
-          imgRef={imgRef}
-          otherTopic={otherTopic}
-          topic={topic}
-        />
-        <section className="mainbar">
-          <div className="figure-wrapper">
-            <figure>
-              <img
-                alt="Canvas data renders here"
-                id="imgPi"
-                src=""
-                ref={imgRef}
-              />
-            </figure>
-          </div>
-        </section>
         <section className="sidebar">
-          <h1>π-orities</h1>
           <form
-            ref={setFormRef}
             onSubmit={handleSubmit}
           >
+            <h1>π-orities</h1>
             <ol>
               <li>
                 <Select 
                   label='Choose a Topic'
                   options={topics}
                   onchange={handleTopicChange}
-                  reference={setTopicRef}
                 />
                 {topic === 'Custom'
                   ? <input
                       autoFocus
                       className='form-input'
                       name="topic"
-                      onChange={processInputData}
-                      ref={setOtherTopicRef}
+                      onChange={handleOtherTopicChange}
                       type="text"
                     />
                   : null
@@ -197,7 +106,6 @@ export default function App() {
                   label='Pick a Flavor'
                   options={flavors}
                   onchange={handleColorChange}
-                  reference={setSelectColorRef}
                 />
               </li>
               <li>
@@ -215,31 +123,65 @@ export default function App() {
                         </tr>
                       </thead>
                       <tbody>
-                        {items.map((item, index) => item)}
+                        {items.map((item, index) => {
+                          return (
+                            <Item
+                              amount={item.amount}
+                              idx={item.idx}
+                              items={items}
+                              key={`${item.idx}`}
+                              name={item.name}
+                              setItems={setItems}
+                            />
+                          );
+                        })}
                       </tbody>
                     </table>
                     : null
                   }
                 </div>
+                <div className="actions">
+                  <AddItem
+                    items={items}
+                    color={color}
+                    setItems={setItems}
+                  />
+                  <button
+                    className='button refresh'
+                    style={{
+                      backgroundImage: `url(${refresh})`
+                    }}
+                    type="submit"
+                  >
+                    Submit
+                  </button>
+                </div>
               </li>
             </ol>
-            <div className="actions">
-              <AddItem
-                selectedColor={selectedColor}
-                processInputData={processInputData}
-                setInputRefs={setInputRefs}
-                setHiddenItems={setHiddenItems}
-                updateInputDisplay={updateInputDisplay}
-                setItems={setItems}
-                setUID={setUID}
-                uID={uID}
-              />
-            </div>  
           </form>
           <footer>
             <p><small>&copy;{new Date().getFullYear()} Mike Kang</small></p>
           </footer>
         </section>
+        <section className="mainbar">
+          <div className="figure-wrapper">
+            <figure>
+              <img
+                alt="Canvas data renders here"
+                id="imgPi"
+                src=""
+                ref={imgRef}
+              />
+            </figure>
+          </div>
+        </section>
+        <PI
+          color={color}
+          items={items}
+          imgRef={imgRef}
+          otherTopic={otherTopic}
+          topic={topic}
+        />
       </main>
     </div>
   );

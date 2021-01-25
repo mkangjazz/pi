@@ -1,33 +1,32 @@
-import React from 'react';
-import Item from './Item';
+import prepArray from '../js/prepArray';
 
 export default function AddItem(props) {
-  function handleAddItem(e) {
-    props.setItems((current) => [
-      ...current,
-      <Item
-        key={`idx-${props.uID}`}
-        idx={`${props.uID}`}
-        updateInputDisplay={props.updateInputDisplay}
-        setInputRefs={props.setInputRefs}
-        setHiddenItems={props.setHiddenItems}
-        processInputData={props.processInputData}
-      />
-    ]);
+  function handleAddItem() {
+    const newItems = [...props.items];
 
-    props.processInputData();
+    newItems.push({
+      amount: 0,
+      name: '',
+    });
 
-    props.setUID(props.uID + 1);
+    props.setItems(
+      prepArray(newItems)
+    );
   }
+
+  const rgb = props.color ? props.color : '0, 0, 0';
 
   return (
     <button
-      className={`button add-item rgb-${props.selectedColor.replace(/\s/g, '').replace(/,/g, '-')}`}
+      className={`button add-item `}
+      style={{
+        backgroundColor: `rgb(${rgb})`
+      }}
       id="add-item"
       onClick={handleAddItem}
       type="button"
     >
-      ++
+      +
     </button>
   );
 }
